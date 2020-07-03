@@ -32,9 +32,14 @@ mutate(murders, rate = total / population * 10^5) %>%
 ## How to read excel
 
 library(readxl)
+fn <- "data/2010_bigfive_regents.xls"
+tab <- read_xls(fn)
+
+## if you have sheets you can do this
 fn <- "data/20_0615-Grafica y Tablas Pruebas Moleculares COVID- semana 15 junio.xlsx"
 ## look at the sheet names
-excel_sheets(fn)
-
-tab <- read_xlsx(fn, sheet = "3-26 to 3-29")
+sheets <- excel_sheets(fn)
+## read the ith sheet
+i <- 2
+tab <- read_xlsx(fn, sheet = sheets[i])
 
