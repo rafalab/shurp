@@ -53,3 +53,42 @@ dat %>%
   geom_point() +
   geom_line(show.legend = FALSE)
 
+## cases and deaths
+## comparing positivity rates for NY and FL
+dat %>% 
+  filter(state %in% c("NY") &
+           date >= make_date(2020, 3, 21)) %>% 
+  ggplot(aes(date, deathIncrease)) +
+  geom_point() +
+  geom_line()
+
+dat %>% 
+  filter(state %in% c("NY") &
+           date >= make_date(2020, 3, 21)) %>%
+  ggplot(aes(date, positiveIncrease/(positiveIncrease+negativeIncrease))) +
+  geom_point() +
+  geom_line()
+
+dat %>% 
+  filter(state %in% c("IL", "MA", "NY", "CT", "PA","LA",
+                      "FL","AZ","TX","CA") &
+           date >= make_date(2020, 3, 21)) %>%
+  mutate(rate = positiveIncrease/(positiveIncrease+negativeIncrease),
+         pct_death = deathIncrease/max(deathIncrease)) %>%
+  ggplot(aes(x = date)) +
+  geom_point(aes(y = rate), col = "red")+
+  geom_point(aes(y = pct_death), col = "blue")+
+  geom_smooth(aes(y = rate), col = "red", span = 0.2)+
+  geom_smooth(aes(y = pct_death), col = "blue", span = 0.2) +
+  facet_wrap(~state, scales = "free_y")
+
+dat %>% 
+  filter(state %in% c("NY") ) %>% 
+  ggplot(aes(x = date, y = positiveIncrease/(positiveIncrease+negativeIncrease),
+             color = state)) +
+  geom_point() +
+  geom_line(show.legend = FALSE)
+
+
+
+

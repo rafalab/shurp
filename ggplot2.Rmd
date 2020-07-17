@@ -101,7 +101,8 @@ It renders a plot, in this case a blank slate since no geometry has been defined
 What has happened above is that the object was created and, because it was not assigned, it was automatically evaluated. But we can assign our plot to an object, for example like this:
 
 ```{r}
-p <- ggplot(data = murders)
+p <- ggplot(data = murders) ## these two 
+p <- murders %>% ggplot()   ## do exactly the same thing
 class(p)
 ```
 
@@ -234,13 +235,15 @@ args(ggplot)
 If we define a mapping in `ggplot`, all the geometries that are added as layers will default to this mapping. We redefine `p`:
 
 ```{r}
-p <- murders %>% ggplot(aes(population/10^6, total, label = abb))
+p <- murders %>% 
+  ggplot(aes(population/10^6, total, label = abb, color = region))
 ```
 
 and then we can simply write the following code to produce the previous plot:
 
 ```{r ggplot-example-7, eval=FALSE}
-p + geom_point(size = 3) + 
+p + 
+  geom_point(size = 3) + 
   geom_text(nudge_x = 1.5)
 ```
 
