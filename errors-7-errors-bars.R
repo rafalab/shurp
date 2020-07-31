@@ -15,7 +15,6 @@ results %>%
   geom_bar(stat = "identity") +
   geom_point(data = gapminder %>% filter(year == 2015), aes(y=population))
 
-
 results %>% 
   ggplot(aes(continent, mean))+
   geom_point(data = gapminder %>% filter(year == 2015), aes(y=population), alpha = 0.5) +
