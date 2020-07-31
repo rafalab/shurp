@@ -27,3 +27,6 @@ gapminder %>% filter(year == 2015) %>%
   geom_boxplot() +
   scale_y_continuous(trans = "log10", limits = c(1,2000), breaks = c(1,50,100,1000,10000))
 
+
+
+
